@@ -43,8 +43,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ccstruct", "ccstruct.vcxpro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tesseractconsole", "tesseractconsole.csproj", "{A7CAC3D7-A6EA-4969-81A7-6648F176CBD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sharepointconsole", "sharepointconsole\sharepointconsole.csproj", "{E61772C5-CB77-4720-BA03-AB585DCF9482}"
-EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -445,26 +443,6 @@ Global
 		{A7CAC3D7-A6EA-4969-81A7-6648F176CBD4}.Release|Mixed Platforms.Build.0 = Release|x86
 		{A7CAC3D7-A6EA-4969-81A7-6648F176CBD4}.Release|x86.ActiveCfg = Release|x86
 		{A7CAC3D7-A6EA-4969-81A7-6648F176CBD4}.Release|x86.Build.0 = Release|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Debug.dll|Any CPU.ActiveCfg = Debug|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Debug.dll|Mixed Platforms.ActiveCfg = Debug|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Debug.dll|Mixed Platforms.Build.0 = Debug|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Debug.dll|x86.ActiveCfg = Debug|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Debug.dll|x86.Build.0 = Debug|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Debug|x86.ActiveCfg = Debug|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Debug|x86.Build.0 = Debug|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Release.dll|Any CPU.ActiveCfg = Release|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Release.dll|Mixed Platforms.ActiveCfg = Release|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Release.dll|Mixed Platforms.Build.0 = Release|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Release.dll|x86.ActiveCfg = Release|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Release.dll|x86.Build.0 = Release|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Release|Any CPU.ActiveCfg = Release|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Release|Mixed Platforms.Build.0 = Release|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Release|x86.ActiveCfg = Release|x86
-		{E61772C5-CB77-4720-BA03-AB585DCF9482}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
