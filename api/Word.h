@@ -64,6 +64,17 @@ public:
 		return System::String::Format("{0} ({1})", Text->ToString(), Confidence.ToString());
 	}
 
+	void CollectResult(PageIterator* pageIterator)
+	{
+		ResultIterator* resultIterator = dynamic_cast<ResultIterator*>(pageIterator);
+		if (resultIterator!=null)
+		{
+			char* text = resultIterator->GetUTF8Text(tesseract::RIL_WORD);
+			Text = new String(text, 0, strlen(text), Encoding::UTF8);
+		}
+		RecognitionItem::CollectResult(pageIterator);
+	}
+
 protected:
 	RecognitionItem* CreateChild()
 	{
@@ -77,6 +88,7 @@ protected:
 
 		return true;
 	}
+
 };
 
 

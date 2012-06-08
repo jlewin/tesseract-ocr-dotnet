@@ -18,6 +18,7 @@ limitations under the License.
 
 #include "Configuration.h"
 #include "RecognitionItem.h";
+#include "resultiterator.h";
 
 BEGIN_NAMSPACE
 
@@ -30,30 +31,67 @@ public:
 	~Character();
 
 public:
-	char Value;
+	String* Value;
+	List<String*>* Variants;
 
 public:
-	// Constructor
-	Character(char character, 
-		int left, int top, int right, int bottom)
-		: RecognitionItem(left, top, right, bottom)
-	{
-		Value = character;
-		_pageLevel = ePageLevel::RIL_SYMBOL;
 
-		_color = System::Drawing::Color::Blue;
+	//ResultIterator* resultIterator = dynamic_cast(pageIterator);
+	//		if (resultIterator!=null)
+	//		{
+
+	//		}
+
+	void CollectResult(PageIterator* pageIterator)
+	{
+		ResultIterator* resultIterator = dynamic_cast<ResultIterator*>(pageIterator);
+		if (resultIterator!=null)
+		{
+			ChoiceIterator* choiceIterator = null;
+	
+			try
+			{
+				choiceIterator = new ChoiceIterator(*resultIterator);
+				
+				do
+				{
+					const char* choiceValue = choiceIterator->GetUTF8Text();
+					if (choiceValue!=NULL)
+						Variants->Add(new String(choiceValue, 0, strlen(choiceValue), Encoding::UTF8));
+
+
+				} while (choiceIterator->Next());
+
+			}
+			__finally
+			{
+				SAFE_DELETE(choiceIterator);
+			}
+		}
+		RecognitionItem::CollectResult(pageIterator);
 	}
 
-	// Constructor
-	Character(char character, double confidence, 
-		int left, int top, int right, int bottom) 
-		: RecognitionItem(confidence, left, top, right, bottom)
-	{
-		Value = character;
-		_pageLevel = ePageLevel::RIL_SYMBOL;
+	//// Constructor
+	//Character(char character, 
+	//	int left, int top, int right, int bottom)
+	//	: RecognitionItem(left, top, right, bottom)
+	//{
+	//	Value = character;
+	//	_pageLevel = ePageLevel::RIL_SYMBOL;
 
-		_color = System::Drawing::Color::Blue;
-	}
+	//	_color = System::Drawing::Color::Blue;
+	//}
+
+	//// Constructor
+	//Character(char character, double confidence, 
+	//	int left, int top, int right, int bottom) 
+	//	: RecognitionItem(confidence, left, top, right, bottom)
+	//{
+	//	Value = character;
+	//	_pageLevel = ePageLevel::RIL_SYMBOL;
+
+	//	_color = System::Drawing::Color::Blue;
+	//}
 	
 protected:
 	PageIteratorLevel GetNextPageIteratorLevel()

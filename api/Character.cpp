@@ -26,6 +26,7 @@ Character::Character()
 	_pageLevel = ePageLevel::RIL_SYMBOL;
 
 	_color = System::Drawing::Color::Blue;
+	Variants =  new List<String*>();
 }
 
 Character::~Character()
