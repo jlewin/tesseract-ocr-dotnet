@@ -229,10 +229,19 @@ ChoiceIterator::ChoiceIterator(const ResultIterator& result_it) {
   BLOB_CHOICE_LIST_CLIST* choices = best_choice->blob_choices();
   if (choices != NULL) {
     BLOB_CHOICE_LIST_C_IT blob_choices_it(choices);
-    for (int blob = 0; blob < result_it.blob_index_; ++blob)
-      blob_choices_it.forward();
-    choice_it_ = new BLOB_CHOICE_IT(blob_choices_it.data());
-    choice_it_->mark_cycle_pt();
+
+	
+	if (!blob_choices_it.empty())
+	{
+		for (int blob = 0; blob < result_it.blob_index_; ++blob)
+		blob_choices_it.forward();
+		choice_it_ = new BLOB_CHOICE_IT(blob_choices_it.data());
+		choice_it_->mark_cycle_pt();
+	}
+	else
+	{
+		choice_it_ = NULL;
+	}
   } else {
     choice_it_ = NULL;
   }

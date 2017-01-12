@@ -19,6 +19,7 @@ limitations under the License.
 #include "Helper.h"
 #include "Character.h"
 #include "Word.h"
+#include "resultiterator.h"
 
 
 BEGIN_NAMSPACE
@@ -50,6 +51,85 @@ String* TesseractProcessor::Recognize(String* filePath)
 	result = new String(text, 0, strlen(text), Encoding::UTF8);
 
 	return result;
+}
+
+DocumentLayout* TesseractProcessor::RecognizeWithLayout(System::Drawing::Image* image)
+{
+	if (image == null) return null;
+
+	Pix* pix = null;
+	try
+	{
+		pix = PixConverter::PixFromImage(image);
+
+		return RecognizeWithLayout(pix);
+	}
+	catch (System::Exception* exp)
+	{
+		throw exp;
+	}
+	__finally
+	{
+		if (pix != null)
+		{
+			pixDestroy(&pix);
+			pix = null;
+		}
+	}
+
+
+}
+
+DocumentLayout* TesseractProcessor::RecognizeWithLayout(Pix* pix)
+{
+	return this->RecognizeWithLayout(this->EngineAPI, pix);
+}
+
+DocumentLayout* TesseractProcessor::RecognizeWithLayout(TessBaseAPI* api, Pix* pix)
+{
+	if (api == null || pix == null)
+		return null;
+
+	api->SetVariable("save_best_choices", "T");
+	//api->SetVariable("save_blob_choices", "T");
+
+	api->SetImage(pix);
+
+	if (_useROI && _roi != System::Drawing::Rectangle::Empty)
+	{
+		int left = 0, top = 0, width = 0, height = 0;
+		this->GetROI(
+			pix->w, pix->h, left, top, width, height);
+		if (width > 0 && height > 0)
+		{
+			api->SetRectangle(left, top, width, height);
+		}
+	}
+
+	DocumentLayout* doc = new DocumentLayout();
+
+	ResultIterator* resultIterator = null;
+	
+	try
+	{
+		bool succed = api->Recognize(null) >= 0;
+		
+		resultIterator = api->GetIterator();
+
+		/*const ResultIterator* rIt = resultIterator;
+		choiceIterator = new ChoiceIterator(*rIt);
+
+		const char* out=choiceIterator->GetUTF8Text();
+		char* out2=(*resultIterator).GetUTF8Text(tesseract::RIL_SYMBOL);*/
+
+		doc->CollectResult(resultIterator);
+	}
+	__finally
+	{
+		SAFE_DELETE(resultIterator);
+	}
+
+	return doc;
 }
 
 String* TesseractProcessor::Recognize(System::Drawing::Image* image)

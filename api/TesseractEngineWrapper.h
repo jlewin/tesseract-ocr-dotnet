@@ -149,6 +149,11 @@ public:
 	String* Recognize(System::Drawing::Image* image);
 
 	//
+	// Recognize text with layout from image
+	//
+	DocumentLayout* RecognizeWithLayout(System::Drawing::Image* image);
+
+	//
 	// Recognize text from binary image
 	//
 	String* RecognizeBinaryImage(unsigned char* binData, int width, int height);
@@ -169,6 +174,8 @@ public:
 private:
 	String* Process(Pix* pix);
 	String* Process(TessBaseAPI* api, Pix* pix);
+	DocumentLayout* RecognizeWithLayout(Pix* pix);
+	DocumentLayout* RecognizeWithLayout(TessBaseAPI* api, Pix* pix);
 
 
 
